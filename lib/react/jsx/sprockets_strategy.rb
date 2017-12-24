@@ -34,14 +34,16 @@ module React
 
       def register_engine(sprockets_env)
         sprockets_env.register_engine('.jsx', React::JSX::Template)
+        sprockets_env.register_engine('.es6', React::JSX::Template)
       end
 
       def register_engine_with_mime_type(sprockets_env)
         sprockets_env.register_engine('.jsx', React::JSX::Processor, mime_type: 'application/javascript', silence_deprecation: true)
+        sprockets_env.register_engine('.es6', React::JSX::Processor, mime_type: 'application/javascript', silence_deprecation: true)
       end
 
       def register_processors(sprockets_env)
-        sprockets_env.register_mime_type('application/jsx', extensions: ['.jsx', '.js.jsx', '.es.jsx', '.es6.jsx'])
+        sprockets_env.register_mime_type('application/jsx', extensions: ['.jsx', '.js.jsx', '.es.jsx', '.es6.jsx', '.es6', '.es6.js'])
         sprockets_env.register_mime_type('application/jsx+coffee', extensions: ['.jsx.coffee', '.js.jsx.coffee'])
         sprockets_env.register_transformer('application/jsx', 'application/javascript', React::JSX::Processor)
         sprockets_env.register_transformer('application/jsx+coffee', 'application/jsx', Sprockets::CoffeeScriptProcessor)
